@@ -53,10 +53,13 @@ const Weekview = () => {
   return (
     <>
       <div className="pt-16 max-w-full lg:max-w-[80%] mx-auto h-full border-2 border-gray-200">
-        <h1 className="font-semibold p-1">
-          {station?.name || "Select a station"}
+        <h1
+          className="font-semibold p-2"
+          style={{ backgroundColor: "#f9b104", color: "white" }}
+        >
+          {station?.name || "Search a station to display bookings"}
         </h1>
-        <div className="flex justify-between mb-4 w-fit gap-2 mx-auto">
+        <div className="flex justify-between mb-4 mt-2 w-fit gap-2 mx-auto">
           <button onClick={goToPreviousWeek}>
             <FaArrowCircleLeft />
           </button>

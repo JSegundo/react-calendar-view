@@ -2,7 +2,7 @@ import Autocomplete from "./autocomplete"
 import { IStation } from "../../interfaces"
 import { useAppDispatch } from "../store"
 import { selectStation } from "../store/stationSlice"
-// const apiUrl = process.env.REACT_APP_API_URL
+const apiUrl = import.meta.env.VITE_API_URL
 
 const Navbar = () => {
   const dispatch = useAppDispatch()
@@ -22,8 +22,7 @@ const Navbar = () => {
         src="https://roadsurfer.com/wp-content/themes/roadsurfer/_/img/logo/logo.svg"
       />
       <Autocomplete
-        // apiUrl={`${apiUrl}/stations?name=`}
-        apiUrl={`https://605c94c36d85de00170da8b4.mockapi.io//stations?name=`}
+        apiUrl={`${apiUrl}/stations?name=`}
         placeholder={"Start searching stations.."}
         onSelect={onSelect}
       />

@@ -1,5 +1,6 @@
 import axios from "axios"
 import { BookingWithStationName, IBooking, IStation } from "../../../interfaces"
+const apiUrl = import.meta.env.VITE_API_URL
 
 interface FetchBookingProps {
   stationId: string
@@ -31,7 +32,7 @@ const fetchBookingData = async (
 ): Promise<IBooking> => {
   try {
     const response = await axios.get<IBooking>(
-      `https://605c94c36d85de00170da8b4.mockapi.io/stations/${stationId}/bookings/${bookingId}`
+      `${apiUrl}/stations/${stationId}/bookings/${bookingId}`
     )
     return response.data
   } catch (error) {
@@ -43,7 +44,7 @@ const fetchBookingData = async (
 export const fetchStation = async (stationId: string): Promise<IStation> => {
   try {
     const response = await axios.get<IStation>(
-      `https://605c94c36d85de00170da8b4.mockapi.io/stations/${stationId}`
+      `${apiUrl}/stations/${stationId}`
     )
     return response.data
   } catch (error) {
