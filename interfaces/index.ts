@@ -8,9 +8,25 @@ export interface IBooking {
   endDate: string
 }
 
+export interface BookingWithStationName extends IBooking {
+  stationName: string
+}
+
+export type OnDragStartHandler = (
+  e: React.DragEvent<HTMLDivElement>,
+  bookingId: string,
+  isStartDate: boolean
+) => void
+export type handleDropBooking = (
+  e: React.DragEvent<HTMLDivElement>,
+  day: string
+) => void
+
 export interface IDayTileProps {
   day: dayjs.Dayjs
   bookings: IBooking[]
+  onDragStart: OnDragStartHandler
+  handleDropBooking: handleDropBooking
 }
 export interface IStation {
   id: string

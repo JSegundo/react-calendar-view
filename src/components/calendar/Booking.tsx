@@ -1,14 +1,20 @@
 import React, { useState } from "react"
-import { IBooking } from "../../../interfaces"
-import Modal from "../modal"
+import { IBooking, OnDragStartHandler } from "../../../interfaces"
+import Modal from "../modal/bookingModal"
 
 export interface IBookingProps {
   booking: IBooking
   isPickup: boolean
   isReturn: boolean
+  onDragStart: OnDragStartHandler
 }
 
-const Booking: React.FC<IBookingProps> = ({ booking, isPickup, isReturn }) => {
+const Booking: React.FC<IBookingProps> = ({
+  booking,
+  onDragStart,
+  isPickup,
+  isReturn,
+}) => {
   const [isOpen, setisOpen] = useState<boolean>(false)
   const handleClose = () => {
     setisOpen(false)
@@ -19,6 +25,8 @@ const Booking: React.FC<IBookingProps> = ({ booking, isPickup, isReturn }) => {
   return (
     <>
       <div
+        draggable
+        onDragStart={(e) => onDragStart(e, booking.id, isPickup)}
         onClick={showModal}
         className="cursor-pointer bg-white sm:rounded-lg shadow-lg relative mb-4 py-2"
       >
@@ -34,12 +42,14 @@ const Booking: React.FC<IBookingProps> = ({ booking, isPickup, isReturn }) => {
           {!isPickup && !isReturn && "Unknown "}
         </div>
       </div>
-      <Modal
-        isOpen={isOpen}
-        onClose={handleClose}
-        bookingId={booking.id}
-        stationId={booking.pickupReturnStationId}
-      />
+      {isOpen ? (
+        <Modal
+          isOpen={isOpen}
+          onClose={handleClose}
+          bookingId={booking.id}
+          stationId={booking.pickupReturnStationId}
+        />
+      ) : null}
     </>
   )
 }

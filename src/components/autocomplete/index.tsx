@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
 import TextField from "./TextField"
+import { fetchDataQuery } from "../../utils/actions"
 
 interface AutocompleteProps<T> {
   apiUrl: string
@@ -18,23 +18,35 @@ const Autocomplete = <T extends { id: string; name: string }>({
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const fetchData = async () => {
+    let isMounted = true
+
+    const fetchDataWrapper = async () => {
       setLoading(true)
       try {
-        const response = await axios.get<T[]>(`${apiUrl}${searchTerm}`)
-        setSearchResults(response.data)
+        await fetchDataQuery<T>(
+          apiUrl,
+          searchTerm,
+          setLoading,
+          setSearchResults
+        )
       } catch (error) {
         console.error("Error fetching data:", error)
-        setSearchResults([])
       } finally {
-        setLoading(false)
+        if (isMounted) {
+          setLoading(false)
+        }
       }
     }
 
     if (searchTerm.trim() !== "") {
-      fetchData()
+      fetchDataWrapper()
     } else {
       setSearchResults([])
+    }
+
+    // Cleanup function to handle component unmounting
+    return () => {
+      isMounted = false
     }
   }, [apiUrl, searchTerm])
 

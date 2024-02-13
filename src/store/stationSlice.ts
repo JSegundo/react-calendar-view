@@ -17,9 +17,24 @@ const stationsSlice = createSlice({
     selectStation(state, action) {
       state.selectedStation = action.payload
     },
+    rescheduleBooking(state, action) {
+      const { bookingId, newDate, isStartDate } = action.payload
+      if (state.selectedStation) {
+        const selectedBooking = state.selectedStation.bookings.find(
+          (booking) => booking.id === bookingId
+        )
+        if (selectedBooking) {
+          if (isStartDate) {
+            selectedBooking.startDate = newDate
+          } else {
+            selectedBooking.endDate = newDate
+          }
+        }
+      }
+    },
   },
 })
 
-export const { selectStation } = stationsSlice.actions
+export const { selectStation, rescheduleBooking } = stationsSlice.actions
 
 export default stationsSlice.reducer
