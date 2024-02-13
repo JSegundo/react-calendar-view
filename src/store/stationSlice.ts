@@ -1,4 +1,3 @@
-// stationsSlice.ts
 import { createSlice } from "@reduxjs/toolkit"
 import { IStation } from "../../interfaces"
 
@@ -23,6 +22,7 @@ const stationsSlice = createSlice({
         const selectedBooking = state.selectedStation.bookings.find(
           (booking) => booking.id === bookingId
         )
+
         if (selectedBooking) {
           if (isStartDate) {
             selectedBooking.startDate = newDate
@@ -30,6 +30,10 @@ const stationsSlice = createSlice({
             selectedBooking.endDate = newDate
           }
         }
+        console.log({
+          status: 201,
+          selectedBooking: JSON.parse(JSON.stringify(selectedBooking)),
+        })
       }
     },
   },

@@ -16,7 +16,7 @@ export const fetchBookingWithStationName = async ({
       fetchStation(stationId),
     ])
 
-    const stationName = station.name // Extract the station name from the station object
+    const stationName = station.name
 
     return { ...booking, stationName }
   } catch (error) {

@@ -17,7 +17,10 @@ const DayTile: React.FC<IDayTileProps> = ({
 
   return (
     <div
-      onDrop={(e) => handleDropBooking(e, day.toISOString())}
+      onDrop={(e) => {
+        const formattedDay = day.format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+        handleDropBooking(e, formattedDay)
+      }}
       onDragOver={(e) => e.preventDefault()}
       className="border p-0 sm:p-2 text-center min-h-80"
     >
