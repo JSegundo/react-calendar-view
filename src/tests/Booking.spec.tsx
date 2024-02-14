@@ -21,7 +21,11 @@ describe("it renders booking with customer data", () => {
       />
     )
 
-    expect(booking.customerName).toBeDefined()
-    expect(screen.queryByText("Pickup ")).toBeDefined()
+    const containerInfo = screen.getByTestId("display-booking")
+    // const customerName = screen.queryByText(booking.customerName)
+    expect(containerInfo).not.to.be.null
+    // expect(containerInfo).toBeInTheDocument()
+    // expect(customerName).not.to.be.null
+    // expect(screen.getByText(booking.customerName)).toBeInTheDocument() // expect(screen.queryByText("pick up")).toBeInTheDocument()
   })
 })

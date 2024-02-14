@@ -8,16 +8,17 @@ describe("autocomplete component", () => {
   const placeholder = "Search..."
   const onSelect = vi.fn()
 
-  test("selects an item when clicked", async () => {
-    renderRdx(
-      <Autocomplete
-        apiUrl={"apiexample"}
-        placeholder={placeholder}
-        onSelect={onSelect}
-      />
-    )
+  renderRdx(
+    <Autocomplete
+      apiUrl={"apiexample"}
+      placeholder={placeholder}
+      onSelect={onSelect}
+    />
+  )
 
+  test("Loading state when user types", async () => {
     const inputElement = screen.getByPlaceholderText(placeholder)
+
     fireEvent.change(inputElement, { target: { value: "Test" } })
     await waitFor(() => {
       expect(screen.getByText("Loading...")).toBeDefined()
