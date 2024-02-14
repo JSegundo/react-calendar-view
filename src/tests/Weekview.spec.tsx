@@ -4,14 +4,14 @@ import { Provider } from "react-redux"
 import { store } from "../store"
 import Weekview from "../components/calendar/Weekview"
 import dayjs from "dayjs"
+import { ReactElement } from "react"
+
+export const renderRdx = (component: ReactElement) =>
+  render(<Provider store={store}>{component}</Provider>)
 
 describe("Weekview component renders without crashing", () => {
   test("renders without crashing", () => {
-    render(
-      <Provider store={store}>
-        <Weekview />
-      </Provider>
-    )
+    renderRdx(<Weekview />)
   })
   const initialWeekStart = dayjs().startOf("week")
   test("initializes the current week correctly", () => {
