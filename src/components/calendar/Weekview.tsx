@@ -60,13 +60,13 @@ const Weekview = () => {
           {station?.name || "Search a station to display bookings"}
         </h1>
         <div className="flex justify-between mb-4 mt-2 w-fit gap-2 mx-auto">
-          <button onClick={goToPreviousWeek}>
+          <button data-testid="prev-week-btn" onClick={goToPreviousWeek}>
             <FaArrowCircleLeft />
           </button>
           <div>
             <span>{currentWeek.format("MMMM YYYY")}</span>{" "}
           </div>
-          <button onClick={goToNextWeek}>
+          <button data-testid="next-week-btn" onClick={goToNextWeek}>
             <FaArrowCircleRight />
           </button>
         </div>
