@@ -95,6 +95,7 @@ const AutocompleteList = <T extends { id: string; name: string }>({
     <ul className="absolute left-0 z-10 mt-0 sm:mt-2 bg-white border border-gray-300 rounded-md shadow-lg w-full">
       {searchResults?.map((item) => (
         <li
+          data-testid="search-result"
           key={item.id}
           className="px-4 py-2 cursor-pointer hover:bg-gray-100"
           onClick={() => onSelect(item)}

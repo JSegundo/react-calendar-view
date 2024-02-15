@@ -58,11 +58,13 @@ export const fetchDataQuery = async <T>(
   searchTerm: string,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setSearchResults: React.Dispatch<React.SetStateAction<T[]>>
-): Promise<void> => {
+): Promise<T[]> => {
+  // ): Promise<void> => {
   setLoading(true)
   try {
     const response = await axios.get<T[]>(`${apiUrl}${searchTerm}`)
     setSearchResults(response.data)
+    return response.data
   } catch (error) {
     console.error("Error fetching data:", error)
     setSearchResults([])

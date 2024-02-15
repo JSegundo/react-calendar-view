@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    "types": ["@testing-library/jest-dom"],
     "target": "ES2020",
+
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
@@ -20,6 +22,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "interfaces"],
+  "include": ["src", "interfaces", "./vitest-setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
