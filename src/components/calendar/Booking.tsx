@@ -37,9 +37,14 @@ const Booking: React.FC<IBookingProps> = ({
           style={{ width: "6px" }}
         ></div>
         <div className="pl-1 text-xs truncate" data-testid="display-booking">
-          {booking.customerName} - {isPickup && "Pickup "}
-          {isReturn && "Return "}
-          {!isPickup && !isReturn && "Unknown "}
+          <div className="flex ">
+            <p>{booking.customerName} </p> <b className="px-1">-</b>
+            <p>
+              {isPickup && "Pickup "}
+              {isReturn && "Return "}
+              {!isPickup && !isReturn && "Unknown "}{" "}
+            </p>
+          </div>
         </div>
       </div>
       {isOpen ? (

@@ -17,7 +17,7 @@ describe("Weekview component renders without crashing", () => {
   test("initializes the current week correctly", () => {
     const initialWeekStartWithFormat = initialWeekStart.format("MMMM YYYY")
     const currentWeekElement = screen.getByText(initialWeekStartWithFormat)
-    expect(currentWeekElement).toBeDefined()
+    expect(currentWeekElement).toBeInTheDocument()
   })
 
   test("switches to the previous week when previous button is clicked", () => {
@@ -29,7 +29,7 @@ describe("Weekview component renders without crashing", () => {
       .format("MMMM YYYY")
 
     const prevWeekElement = screen.getByText(previousWeek)
-    expect(prevWeekElement).toBeDefined()
+    expect(prevWeekElement).toBeInTheDocument()
   })
 
   test("switches to the next week when next button is clicked", () => {
@@ -38,7 +38,7 @@ describe("Weekview component renders without crashing", () => {
 
     const nextWeek = initialWeekStart.add(1, "week").format("MMMM YYYY")
     const nextWeekElement = screen.getByText(nextWeek)
-    expect(nextWeekElement).toBeDefined()
+    expect(nextWeekElement).toBeInTheDocument()
 
     const next4Weeks = initialWeekStart.add(4, "week").format("MMMM YYYY")
     expect(screen.queryByText(next4Weeks)).toBeNull()
@@ -51,7 +51,7 @@ describe("Weekview component renders without crashing", () => {
 
     expectedDays.forEach((day) => {
       const dayElement = screen.getByText(day.format("ddd"))
-      expect(dayElement).toBeDefined()
+      expect(dayElement).toBeInTheDocument()
     })
   })
 })

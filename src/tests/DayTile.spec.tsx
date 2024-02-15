@@ -2,6 +2,7 @@ import dayjs from "dayjs"
 import DayTile from "../components/calendar/DayTile"
 import { renderRdx } from "./Weekview.spec"
 import { test, describe, expect } from "vitest"
+import { screen } from "@testing-library/react"
 
 describe("DayTile component", () => {
   test("displays bookings for the given day", () => {
@@ -26,12 +27,11 @@ describe("DayTile component", () => {
         id: "3",
         startDate: "2024-02-10T12:00:00",
         endDate: "2024-02-10T15:00:00",
-        customerName: "customer 1",
+        customerName: "customer 3",
         pickupReturnStationId: "2",
       }, // Booking for a different day
     ]
 
-    // Render the DayTile component with the mock data
     const { getByText } = renderRdx(
       <DayTile
         day={day}
@@ -41,8 +41,16 @@ describe("DayTile component", () => {
       />
     )
 
-    // Assert that the bookings for the given day are displayed
-    expect(getByText("Wed")).toBeDefined() // Verify day abbreviation
-    expect(getByText("9")).toBeDefined() // Verify day number
+    const customerName = screen.queryByText("customer 1")
+    expect(customerName).toBeInTheDocument()
+
+    const customerName3 = screen.queryByText("customer 3")
+    expect(customerName3).not.toBeInTheDocument()
+
+    const wrongCustomerName = screen.queryByText("customer 2")
+    expect(wrongCustomerName).not.toBeInTheDocument()
+
+    expect(getByText("Wed")).toBeDefined()
+    expect(getByText("9")).toBeDefined()
   })
 })
