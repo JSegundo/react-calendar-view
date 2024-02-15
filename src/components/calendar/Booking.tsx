@@ -28,7 +28,13 @@ const Booking: React.FC<IBookingProps> = ({
         draggable
         onDragStart={(e) => onDragStart(e, booking.id, isPickup)}
         onClick={showModal}
-        className="cursor-pointer bg-white sm:rounded-lg shadow-lg relative mb-4 py-2"
+        className={`cursor-pointer bg-white sm:rounded-lg shadow-lg  mb-4 py-2 border-l-8 ${
+          isPickup
+            ? "border-green-500"
+            : isReturn
+            ? "border-blue-500"
+            : "border-gray-500"
+        }`}
       >
         <div
           className={`absolute left-0 top-0 h-full ${

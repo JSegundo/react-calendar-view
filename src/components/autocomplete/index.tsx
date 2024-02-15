@@ -50,6 +50,10 @@ const Autocomplete = <T extends { id: string; name: string }>({
     }
   }, [apiUrl, searchTerm])
 
+  useEffect(() => {
+    console.log(searchResults)
+  }, [searchResults])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
   }
@@ -68,12 +72,12 @@ const Autocomplete = <T extends { id: string; name: string }>({
       />
       {loading && <Loading />}
 
-      {searchTerm && (
+      {searchTerm ? (
         <AutocompleteList
           searchResults={searchResults}
           onSelect={handleSelect}
         />
-      )}
+      ) : null}
     </div>
   )
 }
@@ -89,7 +93,7 @@ const AutocompleteList = <T extends { id: string; name: string }>({
 }: AutocompleteListProps<T>) => {
   return (
     <ul className="absolute left-0 z-10 mt-0 sm:mt-2 bg-white border border-gray-300 rounded-md shadow-lg w-full">
-      {searchResults.map((item) => (
+      {searchResults?.map((item) => (
         <li
           data-testid="search-result"
           key={item.id}
