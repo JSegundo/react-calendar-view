@@ -36,14 +36,8 @@ const Booking: React.FC<IBookingProps> = ({
             : "border-gray-500"
         }`}
       >
-        <div
-          className={`absolute left-0 top-0 h-full ${
-            isPickup ? "bg-green-500" : isReturn ? "bg-blue-500" : "bg-gray-500"
-          }`}
-          style={{ width: "6px" }}
-        ></div>
         <div className="pl-1 text-xs truncate" data-testid="display-booking">
-          <div className="flex ">
+          <div className="flex w-fit">
             <p>{booking.customerName} </p> <b className="px-1">-</b>
             <p>
               {isPickup && "Pickup "}
