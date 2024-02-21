@@ -37,7 +37,7 @@ const fetchBookingData = async (
     return response.data
   } catch (error) {
     console.error("Error fetching booking data:", error)
-    throw new Error("Failed to fetch booking data") // Throw a custom error message
+    throw new Error("Failed to fetch booking data")
   }
 }
 
@@ -49,7 +49,7 @@ export const fetchStation = async (stationId: string): Promise<IStation> => {
     return response.data
   } catch (error) {
     console.error("Error fetching station name:", error)
-    throw new Error("Failed to fetch station name") // Throw a custom error message
+    throw new Error("Failed to fetch station name")
   }
 }
 
@@ -63,7 +63,7 @@ export const fetchDataQuery = async <T>(
   setLoading(true)
   try {
     const response = await axios.get<T[]>(`${apiUrl}${searchTerm}`)
-    setSearchResults(response.data)
+    setSearchResults(response?.data)
     return response.data
   } catch (error) {
     console.error("Error fetching data:", error)
