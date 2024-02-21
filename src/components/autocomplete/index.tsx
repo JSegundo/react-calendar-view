@@ -44,15 +44,10 @@ const Autocomplete = <T extends { id: string; name: string }>({
       setSearchResults([])
     }
 
-    // Cleanup function to handle component unmounting
     return () => {
       isMounted = false
     }
   }, [apiUrl, searchTerm])
-
-  useEffect(() => {
-    console.log(searchResults)
-  }, [searchResults])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
