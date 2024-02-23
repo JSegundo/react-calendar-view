@@ -6,6 +6,7 @@ https://roadsurfer-calendar.vercel.app/
 
 Calendar - weekview dashboard displaying car rental bookings. 
 
+- Autocomplete field: reusable component
 - Clean, well structured code
 - Drag and drop to reschedule
 - Responsive
