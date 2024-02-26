@@ -12,15 +12,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="h-16 px-8 sm:px-16 navbar bg-white border-b-2 border-gray-200 flex flex-row gap-2 sm:gap-6 items-center">
-      <img
-        className="w-24 sm:w-32 py-4 px-1 sm-px-4 radius-lg"
-        style={{
-          backgroundColor: "#6bbbae",
-          borderRadius: "16px",
-        }}
-        src="https://roadsurfer.com/wp-content/themes/roadsurfer/_/img/logo/logo.svg"
-      />
+    <nav className="h-16 px-8 sm:px-16 navbar bg-white border-b-2 border-gray-200 flex flex-row gap-2 sm:gap-6 justify-center items-center">
       <Autocomplete
         apiUrl={`${apiUrl}/stations?name=`}
         placeholder={"Start searching stations.."}
