@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import { IBooking, OnDragStartHandler } from "../../../interfaces"
-import Modal from "../modal/bookingModal"
+import { IBooking, OnDragStartHandler } from "../../../../interfaces"
+import Modal from "./BookingInfoModal/BookingInfoModal"
 
 export interface IBookingProps {
   booking: IBooking

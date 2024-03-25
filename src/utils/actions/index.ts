@@ -1,7 +1,6 @@
 import axios from "axios"
 import { BookingWithStationName, IBooking, IStation } from "../../../interfaces"
 const apiUrl = import.meta.env.VITE_API_URL
-
 interface FetchBookingProps {
   stationId: string
   bookingId: string
@@ -31,9 +30,12 @@ const fetchBookingData = async (
   bookingId: string
 ): Promise<IBooking> => {
   try {
+    console.log(`${apiUrl}/bookings/${bookingId}`)
     const response = await axios.get<IBooking>(
-      `${apiUrl}/stations/${stationId}/bookings/${bookingId}`
+      `${apiUrl}/bookings/${bookingId}`
+      // `${apiUrl}/stations/${stationId}/bookings/${bookingId}`
     )
+    console.log(response)
     return response.data
   } catch (error) {
     console.error("Error fetching booking data:", error)
@@ -63,6 +65,7 @@ export const fetchDataQuery = async <T>(
   setLoading(true)
   try {
     const response = await axios.get<T[]>(`${apiUrl}${searchTerm}`)
+    // const response = await axios.get<T[]>(`${apiUrl}${searchTerm}`)
     setSearchResults(response?.data)
     return response.data
   } catch (error) {
@@ -71,5 +74,25 @@ export const fetchDataQuery = async <T>(
     throw new Error("Failed to fetch data")
   } finally {
     setLoading(false)
+  }
+}
+
+export const uploadFile = async (bookingId: string, file: File) => {
+  const formData = new FormData()
+  formData.append("file", file)
+
+  try {
+    const res = await axios.post(
+      `${apiUrl}/uploadfile/${bookingId}`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    )
+
+    return res.data.fileUrl
+  } catch (err) {
+    console.error("Error uploading file:", err)
+    throw new Error("Error uploading file. Please try again.")
   }
 }

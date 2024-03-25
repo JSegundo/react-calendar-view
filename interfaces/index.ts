@@ -6,6 +6,7 @@ export interface IBooking {
   customerName: string
   startDate: string
   endDate: string
+  fileUrl?: string
 }
 
 export interface BookingWithStationName extends IBooking {
