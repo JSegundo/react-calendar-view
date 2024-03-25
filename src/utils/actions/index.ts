@@ -12,7 +12,7 @@ export const fetchBookingWithStationName = async ({
 }: FetchBookingProps): Promise<BookingWithStationName> => {
   try {
     const [booking, station] = await Promise.all([
-      fetchBookingData(stationId, bookingId),
+      fetchBookingData(bookingId),
       fetchStation(stationId),
     ])
 
@@ -25,10 +25,7 @@ export const fetchBookingWithStationName = async ({
   }
 }
 
-const fetchBookingData = async (
-  stationId: string,
-  bookingId: string
-): Promise<IBooking> => {
+const fetchBookingData = async (bookingId: string): Promise<IBooking> => {
   try {
     console.log(`${apiUrl}/bookings/${bookingId}`)
     const response = await axios.get<IBooking>(
