@@ -1,5 +1,5 @@
 # React + TypeScript + Vite 
-## Redux + Tailwind + Vitest for Unit test
+### Redux + Tailwind + Vitest for Unit test
 
 live link:
 https://roadsurfer-calendar.vercel.app/
@@ -7,7 +7,7 @@ https://roadsurfer-calendar.vercel.app/
 Calendar - weekview dashboard displaying car rental bookings. 
 
 - Autocomplete field: reusable component
-- Clean, well structured code
+- Attach file to booking
 - Drag and drop to reschedule
 - Responsive
 
