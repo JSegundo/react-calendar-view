@@ -1,53 +1,20 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import TextField from "./TextField"
-import { fetchDataQuery } from "../../utils/actions"
+import { useFetchDataQuery } from "../../utils/actions/hooks/useFetchDataQuery"
 
 interface AutocompleteProps<T> {
-  apiUrl: string
   placeholder: string
   onSelect: (item: T) => void
 }
 
 const Autocomplete = <T extends { id: string; name: string }>({
-  apiUrl,
   placeholder,
   onSelect,
 }: AutocompleteProps<T>) => {
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState<T[]>([])
   const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    let isMounted = true
-
-    const fetchDataWrapper = async () => {
-      setLoading(true)
-      try {
-        await fetchDataQuery<T>(
-          apiUrl,
-          searchTerm,
-          setLoading,
-          setSearchResults
-        )
-      } catch (error) {
-        console.error("Error fetching data:", error)
-      } finally {
-        if (isMounted) {
-          setLoading(false)
-        }
-      }
-    }
-
-    if (searchTerm.trim() !== "") {
-      fetchDataWrapper()
-    } else {
-      setSearchResults([])
-    }
-
-    return () => {
-      isMounted = false
-    }
-  }, [apiUrl, searchTerm])
+  useFetchDataQuery({ setLoading, searchTerm, setSearchResults })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
@@ -86,6 +53,10 @@ const AutocompleteList = <T extends { id: string; name: string }>({
   searchResults,
   onSelect,
 }: AutocompleteListProps<T>) => {
+  if (!searchResults) {
+    return null
+  }
+  console.log(searchResults)
   return (
     <ul className="absolute left-0 z-10 mt-0 sm:mt-2 bg-white border border-gray-300 rounded-md shadow-lg w-full">
       {searchResults?.map((item) => (

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { BookingWithStationName, IBooking, IStation } from "../../../interfaces"
 const apiUrl = import.meta.env.VITE_API_URL
+const mockApiUrl = import.meta.env.VITE_MOCK_API_URL
 interface FetchBookingProps {
   stationId: string
   bookingId: string
@@ -53,16 +54,13 @@ export const fetchStation = async (stationId: string): Promise<IStation> => {
 }
 
 export const fetchDataQuery = async <T>(
-  apiUrl: string,
   searchTerm: string,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setSearchResults: React.Dispatch<React.SetStateAction<T[]>>
 ): Promise<T[]> => {
-  // ): Promise<void> => {
   setLoading(true)
   try {
-    const response = await axios.get<T[]>(`${apiUrl}${searchTerm}`)
-    // const response = await axios.get<T[]>(`${apiUrl}${searchTerm}`)
+    const response = await axios.get<T[]>(`${mockApiUrl}?name=${searchTerm}`)
     setSearchResults(response?.data)
     return response.data
   } catch (error) {
